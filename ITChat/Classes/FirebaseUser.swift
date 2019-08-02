@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class FUser {
+class FirebaseUser {
     
     let objectId: String
     var pushId: String?
@@ -160,13 +160,13 @@ class FUser {
         return Auth.auth().currentUser!.uid
     }
     
-    class func currentUser () -> FUser? {
+    class func currentUser () -> FirebaseUser? {
         
         if Auth.auth().currentUser != nil {
             
             if let dictionary = UserDefaults.standard.object(forKey: kCURRENTUSER) {
                 
-                return FUser.init(_dictionary: dictionary as! NSDictionary)
+                return FirebaseUser.init(_dictionary: dictionary as! NSDictionary)
             }
         }
         
@@ -210,7 +210,7 @@ class FUser {
                 return
             }
             
-            let fUser = FUser(_objectId: firuser!.user.uid, _pushId: "", _createdAt: Date(), _updatedAt: Date(), _email: firuser!.user.email!, _firstname: firstName, _lastname: lastName, _avatar: avatar, _loginMethod: kEMAIL, _phoneNumber: "", _city: "", _country: "")
+            let fUser = FirebaseUser(_objectId: firuser!.user.uid, _pushId: "", _createdAt: Date(), _updatedAt: Date(), _email: firuser!.user.email!, _firstname: firstName, _lastname: lastName, _avatar: avatar, _loginMethod: kEMAIL, _phoneNumber: "", _city: "", _country: "")
             
             
             saveUserLocally(fUser: fUser)
@@ -250,7 +250,7 @@ class FUser {
                 } else {
                     
                     //    we have no user, register
-                    let fUser = FUser(_objectId: firuser!.user.uid, _pushId: "", _createdAt: Date(), _updatedAt: Date(), _email: "", _firstname: "", _lastname: "", _avatar: "", _loginMethod: kPHONE, _phoneNumber: firuser!.user.phoneNumber!, _city: "", _country: "")
+                    let fUser = FirebaseUser(_objectId: firuser!.user.uid, _pushId: "", _createdAt: Date(), _updatedAt: Date(), _email: "", _firstname: "", _lastname: "", _avatar: "", _loginMethod: kPHONE, _phoneNumber: firuser!.user.phoneNumber!, _city: "", _country: "")
                     
                     saveUserLocally(fUser: fUser)
                     saveUserToFirestore(fUser: fUser)
@@ -309,7 +309,7 @@ class FUser {
 
 //MARK: Save user funcs
 
-func saveUserToFirestore(fUser: FUser) {
+func saveUserToFirestore(fUser: FirebaseUser) {
     reference(.User).document(fUser.objectId).setData(userDictionaryFrom(user: fUser) as! [String : Any]) { (error) in
         
         print("error is \(error?.localizedDescription)")
@@ -317,7 +317,7 @@ func saveUserToFirestore(fUser: FUser) {
 }
 
 
-func saveUserLocally(fUser: FUser) {
+func saveUserLocally(fUser: FirebaseUser) {
     
     UserDefaults.standard.set(userDictionaryFrom(user: fUser), forKey: kCURRENTUSER)
     UserDefaults.standard.synchronize()
@@ -346,7 +346,7 @@ func fetchCurrentUserFromFirestore(userId: String) {
 }
 
 
-func fetchCurrentUserFromFirestore(userId: String, completion: @escaping (_ user: FUser?)->Void) {
+func fetchCurrentUserFromFirestore(userId: String, completion: @escaping (_ user: FirebaseUser?)->Void) {
     
     reference(.User).document(userId).getDocument { (snapshot, error) in
         
@@ -354,7 +354,7 @@ func fetchCurrentUserFromFirestore(userId: String, completion: @escaping (_ user
         
         if snapshot.exists {
             
-            let user = FUser(_dictionary: snapshot.data()! as NSDictionary)
+            let user = FirebaseUser(_dictionary: snapshot.data()! as NSDictionary)
             completion(user)
         } else {
             completion(nil)
@@ -366,7 +366,7 @@ func fetchCurrentUserFromFirestore(userId: String, completion: @escaping (_ user
 
 //MARK: Helper funcs
 
-func userDictionaryFrom(user: FUser) -> NSDictionary {
+func userDictionaryFrom(user: FirebaseUser) -> NSDictionary {
     
     let createdAt = dateFormatter().string(from: user.createdAt)
     let updatedAt = dateFormatter().string(from: user.updatedAt)
@@ -375,10 +375,10 @@ func userDictionaryFrom(user: FUser) -> NSDictionary {
     
 }
 
-func getUsersFromFirestore(withIds: [String], completion: @escaping (_ usersArray: [FUser]) -> Void) {
+func getUsersFromFirestore(withIds: [String], completion: @escaping (_ usersArray: [FirebaseUser]) -> Void) {
     
     var count = 0
-    var usersArray: [FUser] = []
+    var usersArray: [FirebaseUser] = []
     
     //go through each user and download it from firestore
     for userId in withIds {
@@ -389,11 +389,11 @@ func getUsersFromFirestore(withIds: [String], completion: @escaping (_ usersArra
             
             if snapshot.exists {
                 
-                let user = FUser(_dictionary: snapshot.data() as! NSDictionary)
+                let user = FirebaseUser(_dictionary: snapshot.data() as! NSDictionary)
                 count += 1
                 
                 //dont add if its current user
-                if user.objectId != FUser.currentId() {
+                if user.objectId != FirebaseUser.currentId() {
                     usersArray.append(user)
                 }
                 
@@ -418,7 +418,7 @@ func updateCurrentUserInFirestore(withValues : [String : Any], completion: @esca
         
         var tempWithValues = withValues
         
-        let currentUserId = FUser.currentId()
+        let currentUserId = FirebaseUser.currentId()
         
         let updatedAt = dateFormatter().string(from: Date())
         
@@ -451,7 +451,7 @@ func updateCurrentUserInFirestore(withValues : [String : Any], completion: @esca
 
 func updateOneSignalId() {
     
-    if FUser.currentUser() != nil {
+    if FirebaseUser.currentUser() != nil {
         
         if let pushId = UserDefaults.standard.string(forKey: kPUSHID) {
             setOneSignalId(pushId: pushId)
@@ -484,6 +484,6 @@ func updateCurrentUserOneSignalId(newId: String) {
 
 //MARK: Chaeck User block status
 
-func checkBlockedStatus(withUser: FUser) -> Bool {
-    return withUser.blockedUsers.contains(FUser.currentId())
+func checkBlockedStatus(withUser: FirebaseUser) -> Bool {
+    return withUser.blockedUsers.contains(FirebaseUser.currentId())
 }
