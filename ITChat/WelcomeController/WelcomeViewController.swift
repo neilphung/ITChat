@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class WelcomeViewController: UIViewController {
 
@@ -27,10 +28,27 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         dismissKeyboard()
+        
+        if emailTextField.text != "" && passwordTextField.text != "" {
+            loginUser()
+        }
     }
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         dismissKeyboard()
+        
+        if emailTextField.text != "" && passwordTextField.text != "" && repeatPasswordTextField.text != "" {
+            
+            if passwordTextField.text == repeatPasswordTextField.text {
+                  goToFinishRegister()
+            }
+            else {
+                ProgressHUD.showError("Password and repeat password no same")
+            }
+        }
+        else {
+            ProgressHUD.showError("All textfile enter ")
+        }
     }
     
     @IBAction func backgroundTap(_ sender: UITapGestureRecognizer) {
@@ -38,6 +56,16 @@ class WelcomeViewController: UIViewController {
     }
     
     //MARK: Helper Method
+    
+    func loginUser(){
+        ProgressHUD.show("Login ...")
+        
+        
+    }
+    
+    func goToFinishRegister(){
+        
+    }
     
     func dismissKeyboard(){
         view.endEditing(false)
