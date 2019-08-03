@@ -11,9 +11,9 @@ import Firebase
 import ProgressHUD
 
 class UsersTableViewController: UITableViewController, UISearchResultsUpdating {
-
     
-
+    
+    
     
     @IBOutlet weak var headerView: UIView!
     
@@ -34,33 +34,93 @@ class UsersTableViewController: UITableViewController, UISearchResultsUpdating {
         
         // xoá các cell không có thông tin hiển thị
         tableView.tableFooterView = UIView()
+        // show searchbar in navigation
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
         
         loadUsers(filter: kCITY)
-
+        
+        
+        
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-      
-        return 1
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return 1
+        }
+        else {
+            return allUsersGroupped.count
+        }
+        
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-        return allUsers.count
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredUsers.count
+        }
+        else {
+            //find section Title
+            let sectionTitle = self.sectionTitleList[section]
+            // user for give title
+            let users = self.allUsersGroupped[sectionTitle]
+            return users!.count
+        }
+        
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UserTableViewCell
         
-        cell.geneateCellWith(fUser: allUsers[indexPath.row], indexPath: indexPath)
-       
-
+        var user: FirebaseUser
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            user = filteredUsers[indexPath.count]
+        }
+        else {
+            let sectionTitle = self.sectionTitleList[indexPath.section]
+            let users = self.allUsersGroupped[sectionTitle]
+            user = users![indexPath.row]
+        }
+        
+        cell.geneateCellWith(fUser: user, indexPath: indexPath)
         return cell
     }
+    
+    //MARK: TableView Delegate
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return ""
+        } else {
+            return sectionTitleList[section]
+        }
+    }
+    
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return nil
+        } else {
+            return self.sectionTitleList
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        
+        return index
+    }
+    
+    
+    
+    
     //MARK: LoadUsers method
     func loadUsers(filter: String){
         ProgressHUD.show()
@@ -76,9 +136,9 @@ class UsersTableViewController: UITableViewController, UISearchResultsUpdating {
         }
         
         query.getDocuments { (snapshot, error) in
-//            self.allUsers = []
-//            self.sectionTitleList = []
-//            self.allUsersGroupped = [:]
+            //            self.allUsers = []
+            //            self.sectionTitleList = []
+            //            self.allUsersGroupped = [:]
             
             if error != nil {
                 print(error!.localizedDescription)
@@ -99,8 +159,10 @@ class UsersTableViewController: UITableViewController, UISearchResultsUpdating {
                     }
                 }
                 
-                //split to groups
+                self.splitDataIntoSection()
+                self.tableView.reloadData()
             }
+            
             self.tableView.reloadData()
             ProgressHUD.dismiss()
             
@@ -108,7 +170,7 @@ class UsersTableViewController: UITableViewController, UISearchResultsUpdating {
         }
     }
     //MARK : IBActions
-
+    
     @IBAction func filterSegmentValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -138,5 +200,36 @@ class UsersTableViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
-
+    
+    //MARK: Helper functions
+    fileprivate func splitDataIntoSection() {
+        
+        var sectionTitle: String = ""
+        
+        for i in 0..<self.allUsers.count {
+            
+            let currentUser = self.allUsers[i]
+            
+            let firstChar = currentUser.firstname.first!
+            
+            let firstCarString = "\(firstChar)"
+            
+            
+            if firstCarString != sectionTitle {
+                
+                sectionTitle = firstCarString
+                
+                self.allUsersGroupped[sectionTitle] = []
+                
+                if !sectionTitleList.contains(sectionTitle) {
+                    self.sectionTitleList.append(sectionTitle)
+                }
+            }
+            
+            self.allUsersGroupped[firstCarString]?.append(currentUser)
+            
+        }
+        
+    }
+    
 }
