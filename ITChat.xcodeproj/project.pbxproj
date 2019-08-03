@@ -10,6 +10,7 @@
 		BD2956F322F51A3000E7988C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F222F51A3000E7988C /* UserTableViewCell.swift */; };
 		BD2956F622F5242D00E7988C /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F522F5242D00E7988C /* UsersTableViewController.swift */; };
 		BD2956F822F53C2500E7988C /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F722F53C2500E7988C /* ChatsViewController.swift */; };
+		BD2956FD22F5649A00E7988C /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956FC22F5649A00E7988C /* ProfileTableViewController.swift */; };
 		BDA04BDE22F3C3AC00051966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA04BDD22F3C3AC00051966 /* AppDelegate.swift */; };
 		BDA04BE822F3C3AE00051966 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDA04BE622F3C3AE00051966 /* LaunchScreen.storyboard */; };
 		BDA04BF022F3C4B900051966 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDA04BEF22F3C4B900051966 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		BD2956F222F51A3000E7988C /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BD2956F522F5242D00E7988C /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		BD2956F722F53C2500E7988C /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		BD2956FC22F5649A00E7988C /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		BDA04BDA22F3C3AC00051966 /* ITChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA04BDD22F3C3AC00051966 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDA04BE722F3C3AE00051966 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,6 +79,30 @@
 			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
+		BD2956F922F563C800E7988C /* ChatsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BD2956F722F53C2500E7988C /* ChatsViewController.swift */,
+			);
+			path = ChatsControllers;
+			sourceTree = "<group>";
+		};
+		BD2956FA22F563EC00E7988C /* SettingControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */,
+			);
+			path = SettingControllers;
+			sourceTree = "<group>";
+		};
+		BD2956FB22F5641A00E7988C /* Users Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BD2956F522F5242D00E7988C /* UsersTableViewController.swift */,
+			);
+			path = "Users Controllers";
+			sourceTree = "<group>";
+		};
 		BDA04BD122F3C3AC00051966 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +126,9 @@
 			children = (
 				BDA04BDD22F3C3AC00051966 /* AppDelegate.swift */,
 				BDA04BEF22F3C4B900051966 /* Main.storyboard */,
+				BD2956FB22F5641A00E7988C /* Users Controllers */,
+				BD2956FA22F563EC00E7988C /* SettingControllers */,
+				BD2956F922F563C800E7988C /* ChatsControllers */,
 				BD2956F422F523DC00E7988C /* Custom Cell */,
 				BDF7696422F3DE7500C04BB7 /* WelcomeController */,
 				BDF7696322F3DE5B00C04BB7 /* Helpers */,
@@ -108,9 +137,7 @@
 				BDF7695B22F3D70500C04BB7 /* GoogleService-Info.plist */,
 				BDA04BE922F3C3AE00051966 /* Info.plist */,
 				BDF7696522F3DEC800C04BB7 /* Assets.xcassets */,
-				BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */,
-				BD2956F522F5242D00E7988C /* UsersTableViewController.swift */,
-				BD2956F722F53C2500E7988C /* ChatsViewController.swift */,
+				BD2956FC22F5649A00E7988C /* ProfileTableViewController.swift */,
 			);
 			path = ITChat;
 			sourceTree = "<group>";
@@ -272,6 +299,7 @@
 				BDA04BDE22F3C3AC00051966 /* AppDelegate.swift in Sources */,
 				BDF7696022F3DDDA00C04BB7 /* Constans.swift in Sources */,
 				BDF7696222F3DE2000C04BB7 /* CollectionReference.swift in Sources */,
+				BD2956FD22F5649A00E7988C /* ProfileTableViewController.swift in Sources */,
 				BD2956F822F53C2500E7988C /* ChatsViewController.swift in Sources */,
 				BDA04BF222F3C4EF00051966 /* WelcomeViewController.swift in Sources */,
 				BDCC128022F3F8F8006FDA66 /* FinishRegistrationViewController.swift in Sources */,
