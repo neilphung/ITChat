@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD2956F322F51A3000E7988C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F222F51A3000E7988C /* UserTableViewCell.swift */; };
+		BD2956F622F5242D00E7988C /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F522F5242D00E7988C /* UsersTableViewController.swift */; };
+		BD2956F822F53C2500E7988C /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F722F53C2500E7988C /* ChatsViewController.swift */; };
 		BDA04BDE22F3C3AC00051966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA04BDD22F3C3AC00051966 /* AppDelegate.swift */; };
 		BDA04BE822F3C3AE00051966 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDA04BE622F3C3AE00051966 /* LaunchScreen.storyboard */; };
 		BDA04BF022F3C4B900051966 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDA04BEF22F3C4B900051966 /* Main.storyboard */; };
@@ -24,6 +27,9 @@
 
 /* Begin PBXFileReference section */
 		93196D687D9829389EB481A6 /* Pods-ITChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITChat.release.xcconfig"; path = "Target Support Files/Pods-ITChat/Pods-ITChat.release.xcconfig"; sourceTree = "<group>"; };
+		BD2956F222F51A3000E7988C /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		BD2956F522F5242D00E7988C /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
+		BD2956F722F53C2500E7988C /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		BDA04BDA22F3C3AC00051966 /* ITChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA04BDD22F3C3AC00051966 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDA04BE722F3C3AE00051966 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +69,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BD2956F422F523DC00E7988C /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BD2956F222F51A3000E7988C /* UserTableViewCell.swift */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
 		BDA04BD122F3C3AC00051966 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +100,7 @@
 			children = (
 				BDA04BDD22F3C3AC00051966 /* AppDelegate.swift */,
 				BDA04BEF22F3C4B900051966 /* Main.storyboard */,
+				BD2956F422F523DC00E7988C /* Custom Cell */,
 				BDF7696422F3DE7500C04BB7 /* WelcomeController */,
 				BDF7696322F3DE5B00C04BB7 /* Helpers */,
 				BDF7696922F3DFF800C04BB7 /* Classes */,
@@ -94,6 +109,8 @@
 				BDA04BE922F3C3AE00051966 /* Info.plist */,
 				BDF7696522F3DEC800C04BB7 /* Assets.xcassets */,
 				BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */,
+				BD2956F522F5242D00E7988C /* UsersTableViewController.swift */,
+				BD2956F722F53C2500E7988C /* ChatsViewController.swift */,
 			);
 			path = ITChat;
 			sourceTree = "<group>";
@@ -250,12 +267,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDCC128422F429B2006FDA66 /* SettingTableViewController.swift in Sources */,
+				BD2956F322F51A3000E7988C /* UserTableViewCell.swift in Sources */,
 				BDF7695E22F3DD4600C04BB7 /* HelperMethod.swift in Sources */,
 				BDA04BDE22F3C3AC00051966 /* AppDelegate.swift in Sources */,
 				BDF7696022F3DDDA00C04BB7 /* Constans.swift in Sources */,
 				BDF7696222F3DE2000C04BB7 /* CollectionReference.swift in Sources */,
+				BD2956F822F53C2500E7988C /* ChatsViewController.swift in Sources */,
 				BDA04BF222F3C4EF00051966 /* WelcomeViewController.swift in Sources */,
 				BDCC128022F3F8F8006FDA66 /* FinishRegistrationViewController.swift in Sources */,
+				BD2956F622F5242D00E7988C /* UsersTableViewController.swift in Sources */,
 				BDF7696822F3DFEA00C04BB7 /* FirebaseUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
