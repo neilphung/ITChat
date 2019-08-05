@@ -5,6 +5,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - DACircularProgress (2.3.1)
   - Firebase/Auth (6.4.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.2.0)
@@ -83,25 +84,47 @@ PODS:
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
   - GTMSessionFetcher/Core (1.2.2)
+  - IDMPhotoBrowser (1.11.3):
+    - DACircularProgress
+    - pop
+    - SDWebImage (= 4.0.0)
+  - ImagePicker (3.1.0)
+  - IQAudioRecorderController (1.2.3):
+    - SCSiriWaveformView
+  - JSQMessagesViewController (7.3.3):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - leveldb-library (1.20)
+  - MBProgressHUD (1.1.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - pop (1.0.12)
   - ProgressHUD (2.60)
   - Protobuf (3.9.0)
+  - SCSiriWaveformView (1.1.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
+  - IDMPhotoBrowser
+  - ImagePicker
+  - IQAudioRecorderController
+  - JSQMessagesViewController (= 7.3.3)
+  - MBProgressHUD
   - ProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL-GRPC
+    - DACircularProgress
     - Firebase
     - FirebaseAuth
     - FirebaseAuthInterop
@@ -113,13 +136,23 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - IDMPhotoBrowser
+    - ImagePicker
+    - IQAudioRecorderController
+    - JSQMessagesViewController
+    - JSQSystemSoundPlayer
     - leveldb-library
+    - MBProgressHUD
     - nanopb
+    - pop
     - ProgressHUD
     - Protobuf
+    - SCSiriWaveformView
+    - SDWebImage
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   Firebase: 9445469655a98e9010737f4bc4720e5bda465873
   FirebaseAuth: 68cfa47997f53d29ce978e7a615fb78d7925fcbe
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -131,11 +164,20 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  IDMPhotoBrowser: b96159fe4adb991a844068eb17dab9c0b7d7e51a
+  ImagePicker: db1fd7626337b2577c523bef5f499bbbe5a37079
+  IQAudioRecorderController: 69a67c2e0b87bd8746cbb4de175fd7a0bf820009
+  JSQMessagesViewController: 0ee3f80237268192a3e8337fd0d787f1a1bf5a7a
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   ProgressHUD: 4e4efbaf4f5de8bd32e0c4c3b6644a90ea1a8c3e
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
+  SCSiriWaveformView: 15b9dd6f94c7536e2032b34a35c6ff74d38c7411
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 632d3415822c4c334a78c98a1ecf0ea1ccd15f14
+PODFILE CHECKSUM: c54e4de8dff1b041a180455b81843595906b195f
 
 COCOAPODS: 1.7.3
