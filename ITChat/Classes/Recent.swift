@@ -34,7 +34,7 @@ func startPrivateChat(Fuser1 : FirebaseUser, Fuser2 : FirebaseUser) -> String{
 }
 
 func createRecent(members: [String], chatRoomId: String, withUserUserName: String, type: String, users: [FirebaseUser]?, avatarOfGroup: String?){
-
+    
     var tempMembers = members
     reference(.Recent).whereField(kCHATROOMID, isEqualTo: chatRoomId).getDocuments { (snapshot, error) in
         guard let snapshot = snapshot else {return}
@@ -96,4 +96,30 @@ func createRecentItem(userId: String, chatRoomId: String, members: [String], wit
     
     //save recent chat
     localReference.setData(recent)
+}
+
+
+//Restart Chat
+
+func restartRecentChat(recent: NSDictionary) {
+    
+    if recent[kTYPE] as! String == kPRIVATE {
+        
+        createRecent(members: recent[kMEMBERSTOPUSH] as! [String], chatRoomId: recent[kCHATROOMID] as! String, withUserUserName: FirebaseUser.currentUser()!.firstname, type: kPRIVATE, users: [FirebaseUser.currentUser()!], avatarOfGroup: nil)
+    }
+    
+    if recent[kTYPE] as! String == kGROUP {
+        
+        createRecent(members: recent[kMEMBERSTOPUSH] as! [String], chatRoomId: recent[kCHATROOMID] as! String, withUserUserName: recent[kWITHUSERFULLNAME] as! String, type: kGROUP, users: nil, avatarOfGroup: recent[kAVATAR] as? String)
+    }
+}
+
+
+//Delete recent
+func deleteRecentChat(recentChatDictionary: NSDictionary) {
+    
+    if let recentId = recentChatDictionary[kRECENTID] {
+        
+        reference(.Recent).document(recentId as! String).delete()
+    }
 }
