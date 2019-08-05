@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD03105722F7C31500613847 /* RecentChatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD03105622F7C31500613847 /* RecentChatsTableViewCell.swift */; };
 		BD2956F322F51A3000E7988C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F222F51A3000E7988C /* UserTableViewCell.swift */; };
 		BD2956F622F5242D00E7988C /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F522F5242D00E7988C /* UsersTableViewController.swift */; };
 		BD2956F822F53C2500E7988C /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2956F722F53C2500E7988C /* ChatsViewController.swift */; };
@@ -17,6 +18,7 @@
 		BDA04BF222F3C4EF00051966 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA04BF122F3C4EF00051966 /* WelcomeViewController.swift */; };
 		BDCC128022F3F8F8006FDA66 /* FinishRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCC127F22F3F8F8006FDA66 /* FinishRegistrationViewController.swift */; };
 		BDCC128422F429B2006FDA66 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */; };
+		BDF0F29322F722BB001C9D73 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F29222F722BB001C9D73 /* Recent.swift */; };
 		BDF7695C22F3D70500C04BB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF7695B22F3D70500C04BB7 /* GoogleService-Info.plist */; };
 		BDF7695E22F3DD4600C04BB7 /* HelperMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7695D22F3DD4600C04BB7 /* HelperMethod.swift */; };
 		BDF7696022F3DDDA00C04BB7 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7695F22F3DDDA00C04BB7 /* Constans.swift */; };
@@ -28,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		93196D687D9829389EB481A6 /* Pods-ITChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITChat.release.xcconfig"; path = "Target Support Files/Pods-ITChat/Pods-ITChat.release.xcconfig"; sourceTree = "<group>"; };
+		BD03105622F7C31500613847 /* RecentChatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatsTableViewCell.swift; sourceTree = "<group>"; };
 		BD2956F222F51A3000E7988C /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BD2956F522F5242D00E7988C /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		BD2956F722F53C2500E7988C /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		BDA04BF122F3C4EF00051966 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BDCC127F22F3F8F8006FDA66 /* FinishRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRegistrationViewController.swift; sourceTree = "<group>"; };
 		BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		BDF0F29222F722BB001C9D73 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		BDF7695B22F3D70500C04BB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDF7695D22F3DD4600C04BB7 /* HelperMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethod.swift; sourceTree = "<group>"; };
 		BDF7695F22F3DDDA00C04BB7 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				BD2956F222F51A3000E7988C /* UserTableViewCell.swift */,
+				BD03105622F7C31500613847 /* RecentChatsTableViewCell.swift */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF7696722F3DFEA00C04BB7 /* FirebaseUser.swift */,
+				BDF0F29222F722BB001C9D73 /* Recent.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -293,7 +299,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD03105722F7C31500613847 /* RecentChatsTableViewCell.swift in Sources */,
 				BDCC128422F429B2006FDA66 /* SettingTableViewController.swift in Sources */,
+				BDF0F29322F722BB001C9D73 /* Recent.swift in Sources */,
 				BD2956F322F51A3000E7988C /* UserTableViewCell.swift in Sources */,
 				BDF7695E22F3DD4600C04BB7 /* HelperMethod.swift in Sources */,
 				BDA04BDE22F3C3AC00051966 /* AppDelegate.swift in Sources */,

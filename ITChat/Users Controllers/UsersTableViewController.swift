@@ -118,6 +118,22 @@ class UsersTableViewController: UITableViewController, UISearchResultsUpdating, 
         return index
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        var user: FirebaseUser
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            user = filteredUsers[indexPath.count]
+        }
+        else {
+            let sectionTitle = self.sectionTitleList[indexPath.section]
+            let users = self.allUsersGroupped[sectionTitle]
+            user = users![indexPath.row]
+        }
+        startPrivateChat(Fuser1: FirebaseUser.currentUser()!, Fuser2: user)
+    }
+    
     
     
     
