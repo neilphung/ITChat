@@ -18,6 +18,11 @@ import FirebaseFirestore
 
 class ChatViewController: JSQMessagesViewController {
     
+    var chatRoomId : String!
+    var memberIds : [String]!
+    var memberToPush: [String]!
+    var titleChat : String!
+    
     var outgoingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
     
     var incomingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
@@ -138,8 +143,16 @@ class ChatViewController: JSQMessagesViewController {
     //MARK: Send Messages
     func sendMessage(text: String?, date: Date, picture: UIImage?, location: String?, video: NSURL?, audio: String?) {
         
+        var outgoingMessage: OutgoingMessage?
+        let currenUser = FirebaseUser.currentUser()!
         
+        if let text = text {
+            outgoingMessage = OutgoingMessage(message: text, senderId: currenUser.objectId, senderName: currenUser.firstname, date: date, status: kDELIVERED, type: kTEXT)
+        }
         
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        self.finishSendingMessage()
+        outgoingMessage!.sendMessage(chatRoomId: chatRoomId, messageDictionary: outgoingMessage!.messageDictionary, memberIds: memberIds, membersToPush: memberToPush)
     }
     
     //MARK: IBActions

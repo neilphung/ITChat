@@ -19,6 +19,8 @@
 		BDA04BF222F3C4EF00051966 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA04BF122F3C4EF00051966 /* WelcomeViewController.swift */; };
 		BDCC128022F3F8F8006FDA66 /* FinishRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCC127F22F3F8F8006FDA66 /* FinishRegistrationViewController.swift */; };
 		BDCC128422F429B2006FDA66 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */; };
+		BDEA471C22F90BC300505A65 /* OutgoingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA471B22F90BC300505A65 /* OutgoingMessage.swift */; };
+		BDEA471E22F9241500505A65 /* IncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEA471D22F9241500505A65 /* IncomingMessage.swift */; };
 		BDF0F29322F722BB001C9D73 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0F29222F722BB001C9D73 /* Recent.swift */; };
 		BDF7695C22F3D70500C04BB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDF7695B22F3D70500C04BB7 /* GoogleService-Info.plist */; };
 		BDF7695E22F3DD4600C04BB7 /* HelperMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF7695D22F3DD4600C04BB7 /* HelperMethod.swift */; };
@@ -45,6 +47,8 @@
 		BDA04BF122F3C4EF00051966 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BDCC127F22F3F8F8006FDA66 /* FinishRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRegistrationViewController.swift; sourceTree = "<group>"; };
 		BDCC128322F429B2006FDA66 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		BDEA471B22F90BC300505A65 /* OutgoingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessage.swift; sourceTree = "<group>"; };
+		BDEA471D22F9241500505A65 /* IncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessage.swift; sourceTree = "<group>"; };
 		BDF0F29222F722BB001C9D73 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		BDF7695B22F3D70500C04BB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDF7695D22F3DD4600C04BB7 /* HelperMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethod.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 			children = (
 				BDF7696722F3DFEA00C04BB7 /* FirebaseUser.swift */,
 				BDF0F29222F722BB001C9D73 /* Recent.swift */,
+				BDEA471B22F90BC300505A65 /* OutgoingMessage.swift */,
+				BDEA471D22F9241500505A65 /* IncomingMessage.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -303,8 +309,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD03105722F7C31500613847 /* RecentChatsTableViewCell.swift in Sources */,
+				BDEA471C22F90BC300505A65 /* OutgoingMessage.swift in Sources */,
 				BDCC128422F429B2006FDA66 /* SettingTableViewController.swift in Sources */,
 				BDF0F29322F722BB001C9D73 /* Recent.swift in Sources */,
+				BDEA471E22F9241500505A65 /* IncomingMessage.swift in Sources */,
 				BD2956F322F51A3000E7988C /* UserTableViewCell.swift in Sources */,
 				BDF7695E22F3DD4600C04BB7 /* HelperMethod.swift in Sources */,
 				BDA04BDE22F3C3AC00051966 /* AppDelegate.swift in Sources */,
