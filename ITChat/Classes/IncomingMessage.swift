@@ -25,15 +25,15 @@ class IncomingMessage {
         
         switch type {
         case kTEXT:
-           message = createTextMessage(messageDicnationary: messageDictionary, chatRoomId: chatRoomId)
+            message = createTextMessage(messageDictionary: messageDictionary, chatRoomId: chatRoomId)
         case kPICTURE:
-           print("create kPICTURE message")
+            print("create kPICTURE message")
         case kVIDEO:
-          print("create kVIDEO message")
+            print("create kVIDEO message")
         case kAUDIO:
-             print("create kAUDIO message")
+            print("create kAUDIO message")
         case kLOCATION:
-             print("create kLOCATION message")
+            print("create kLOCATION message")
         default:
             print("unknown message type")
         }
@@ -47,27 +47,28 @@ class IncomingMessage {
     
     //MARK: Create Message types
     
-    func createTextMessage(messageDicnationary: NSDictionary, chatRoomId: String) -> JSQMessage {
+    //MARK: Create Message types
+    
+    func createTextMessage(messageDictionary: NSDictionary, chatRoomId: String) -> JSQMessage {
         
-        let name = messageDicnationary[kSENDERNAME] as? String
-        let userId = messageDicnationary[kSENDERID] as? String
+        let name = messageDictionary[kSENDERNAME] as? String
+        let userId = messageDictionary[kSENDERID] as? String
         
         var date: Date!
         
-        if let created = messageDicnationary[kDATE] {
-            if (created as! String).count != 14{
+        if let created = messageDictionary[kDATE] {
+            if (created as! String).count != 14 {
                 date = Date()
+            } else {
+                date = dateFormatter().date(from: created as! String)
             }
-            else {
-                date = DateFormatter().date(from: created as! String)
-            }
-        }
-        
-        else {
+        } else {
             date = Date()
         }
         
-        let text = messageDicnationary[kMESSAGE] as! String
+        let text = messageDictionary[kMESSAGE] as! String
+        
+//        let decryptedText = Encryption.decryptText(chatRoomId: chatRoomId, encryptedMessage: messageDictionary[kMESSAGE] as! String)
         
         return JSQMessage(senderId: userId, senderDisplayName: name, date: date, text: text)
     }

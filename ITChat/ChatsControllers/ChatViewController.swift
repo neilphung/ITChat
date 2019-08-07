@@ -23,6 +23,20 @@ class ChatViewController: JSQMessagesViewController {
     var memberToPush: [String]!
     var titleChat : String!
     
+    let legitTypes = [kAUDIO, kVIDEO, kTEXT, kLOCATION, kPICTURE]
+    
+    var maxMessageNumber = 0
+    var minMessageNumber = 0
+    var loadOld = false
+    var loadedMesseagesCount = 0
+    
+    var messages:[JSQMessage] = []
+    var objectMessages :[NSDictionary] = []
+    var loadedMessages : [NSDictionary] = []
+    var allPictureMessages :[String] = []
+    
+    var initialLoadComplete = false
+    
     var outgoingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
     
     var incomingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
@@ -37,15 +51,19 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+
         navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.leftBarButtonItems = [UIBarButtonItem(image: UIImage(named: "Back"), style: .plain, target: self, action: #selector(self.backAction))]
         
         collectionView?.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
+        loadMessages()
+        
         self.senderId = FirebaseUser.currentId()
         self.senderDisplayName = FirebaseUser.currentUser()!.firstname
+        
+        
         
         //fix for Ipgone x
         let constraint = perform(Selector(("toolbarBottomLayoutGuide")))?.takeUnretainedValue() as! NSLayoutConstraint
@@ -61,6 +79,45 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.rightBarButtonItem.setTitle("", for: .normal)
     }
     
+    //MARK: JSQMessages DataSoure functions
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        
+        let date = messages[indexPath.row]
+
+        //set text color
+        if date.senderId == FirebaseUser.currentId() {
+            cell.textView?.textColor = .white
+            
+        }
+        else {
+            cell.textView?.textColor = .blue
+        }
+        return cell
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        
+        return messages[indexPath.row]
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let data = messages[indexPath.row]
+        
+        if data.senderId == FirebaseUser.currentId() {
+            return outgoingBubble
+        }
+        else {
+            return incomingBubble
+        }
+    }
+    
     //MARK: JSQMessages Delegate functions
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
@@ -71,24 +128,24 @@ class ChatViewController: JSQMessagesViewController {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         // add 4 optionMenu
         let takePhotoOrVideo = UIAlertAction(title: "Camera", style: .default) { (action) in
-//            camera.PresentMultyCamera(target: self, canEdit: false)
+            //            camera.PresentMultyCamera(target: self, canEdit: false)
         }
         
         let sharePhoto = UIAlertAction(title: "Photo Library", style: .default) { (action) in
             
-//            camera.PresentPhotoLibrary(target: self, canEdit: false)
+            //            camera.PresentPhotoLibrary(target: self, canEdit: false)
         }
         
         let shareVideo = UIAlertAction(title: "Video Library", style: .default) { (action) in
             
-//            camera.PresentVideoLibrary(target: self, canEdit: false)
+            //            camera.PresentVideoLibrary(target: self, canEdit: false)
         }
         
         let shareLocation = UIAlertAction(title: "Share Location", style: .default) { (action) in
             
-//            if self.haveAccessToUserLocation() {
-//                self.sendMessage(text: nil, date: Date(), picture: nil, location: kLOCATION, video: nil, audio: nil)
-//            }
+            //            if self.haveAccessToUserLocation() {
+            //                self.sendMessage(text: nil, date: Date(), picture: nil, location: kLOCATION, video: nil, audio: nil)
+            //            }
         }
         
         
@@ -134,10 +191,10 @@ class ChatViewController: JSQMessagesViewController {
         } else {
             //printer audio mesage
             
-//            let audioVC = AudioViewController(delegate_: self)
-//            audioVC.presentAudioRecorder(target: self)
+            //            let audioVC = AudioViewController(delegate_: self)
+            //            audioVC.presentAudioRecorder(target: self)
         }
-   
+        
     }
     
     //MARK: Send Messages
@@ -155,9 +212,88 @@ class ChatViewController: JSQMessagesViewController {
         outgoingMessage!.sendMessage(chatRoomId: chatRoomId, messageDictionary: outgoingMessage!.messageDictionary, memberIds: memberIds, membersToPush: memberToPush)
     }
     
+    
+    
     //MARK: IBActions
     @objc func backAction() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func loadMessages() {
+        //get last 11 messages
+        //try vấn và sắp xếp theo này và giới hạn bổ sung để chỉ trả về số lượng tài liệu đã chỉ định.
+        reference(.Message).document(FirebaseUser.currentId()).collection(chatRoomId).order(by: kDATE, descending: true).limit(to: 11).getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                
+                self.initialLoadComplete = true
+                // listen for new chats
+                return
+            }
+            //sap xep
+            let sorted = (dictionaryFromSnapshots(snapshots: snapshot.documents) as NSArray).sortedArray(using: [NSSortDescriptor(key: kDATE, ascending: true)]) as! [NSDictionary]
+            
+            // remove bad messages
+            self.loadedMessages =  self.removeBadMessages(allMessages: sorted)
+            print("loadedMessages\(self.loadedMessages)")
+            //insert messages
+            self.insertMessages()
+            self.finishReceivingMessage(animated: true)
+            
+            self.initialLoadComplete = true
+            
+            print("sortMessage\(sorted)")
+            print("we have\(self.messages.count) messages loaded")
+            
+            
+            // get picture messages
+            
+            
+            //get old messages in background
+            
+            //start listening for new chats
+            
+        }
+        
+    }
+    
+    //MARK: InsertMessages
+    func insertMessages(){
+        maxMessageNumber = loadedMessages.count - loadedMesseagesCount
+        minMessageNumber = maxMessageNumber - kNUMBEROFMESSAGES
+        
+        if minMessageNumber < 0 {
+            minMessageNumber = 0
+        }
+        print("max is : \(maxMessageNumber)")
+        print("min is : \(minMessageNumber)")
+        
+        for i in minMessageNumber ..< maxMessageNumber {
+            let messageDictionary = loadedMessages[i]
+            
+            insertInitialLoadMessages(messageDictionary: messageDictionary)
+            print("insertInitialLoadMessages\(insertInitialLoadMessages)")
+            print(insertInitialLoadMessages)
+            loadedMesseagesCount += 1
+        }
+        self.showLoadEarlierMessagesHeader = (loadedMesseagesCount != loadedMessages.count)
+    }
+    
+    func insertInitialLoadMessages(messageDictionary: NSDictionary) -> Bool {
+        
+        let incomingMessage = IncomingMessage(collectionView_: self.collectionView!)
+        
+        //check if incoming
+        if messageDictionary[kSENDERID] as! String != FirebaseUser.currentId(){
+            //update message status
+        }
+        let message = incomingMessage.createMessage(messageDictionary: messageDictionary, chatRoomId: chatRoomId)
+        
+        if message != nil {
+            objectMessages.append(messageDictionary)
+            messages.append(message!)
+        }
+        
+        return isIncoming(messageDictionary: messageDictionary)
     }
     
     //MARK: CustomSendButton
@@ -179,5 +315,36 @@ class ChatViewController: JSQMessagesViewController {
             self.inputToolbar.contentView.rightBarButtonItem.setImage(UIImage(named: "mic"), for: .normal)
         }
         
+    }
+    
+    //Helper method
+    //xoa nhung tin nhan khong the hien thi
+    func removeBadMessages(allMessages: [NSDictionary]) -> [NSDictionary] {
+        
+        var tempMessages = allMessages
+        
+        for message in tempMessages {
+            
+            if message[kTYPE] != nil {
+                if !self.legitTypes.contains(message[kTYPE] as! String) {
+                    
+                    //remove the message
+                    tempMessages.remove(at: tempMessages.index(of: message)!)
+                }
+            } else {
+                tempMessages.remove(at: tempMessages.index(of: message)!)
+            }
+        }
+        return tempMessages
+    }
+    
+    func isIncoming(messageDictionary: NSDictionary) -> Bool{
+        
+        if FirebaseUser.currentId() == messageDictionary[kSENDERID] as! String {
+            return false
+        }
+        else {
+            return true
+        }
     }
 }

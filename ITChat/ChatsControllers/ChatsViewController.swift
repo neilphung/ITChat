@@ -252,7 +252,7 @@ class ChatsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 if snapshot.exists {
                     
-                    let userDictionary = snapshot.data() as! NSDictionary
+                    let userDictionary = snapshot.data()! as NSDictionary
                     
                     let tempUser = FirebaseUser(_dictionary: userDictionary)
                     

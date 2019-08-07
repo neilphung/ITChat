@@ -17,8 +17,8 @@ pod 'ProgressHUD'
 pod 'MBProgressHUD'
 pod 'IQAudioRecorderController'
 
-pod 'JSQMessagesViewController', '7.3.3'
+pod 'JSQMessagesViewController'
 pod 'IDMPhotoBrowser'
-pod 'ImagePicker'
+#pod 'ImagePicker'
 
 end
